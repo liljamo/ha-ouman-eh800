@@ -1,0 +1,6 @@
+{
+  "domain": "ouman_eh800",
+  "name": "Ouman EH-800",
+  "config_flow": true,
+  "version": "0.1.0"
+}
