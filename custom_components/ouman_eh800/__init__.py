@@ -1,6 +1,7 @@
 """
 ouman_eh800
 """
+
 import logging
 
 from homeassistant.core import HomeAssistant
@@ -12,7 +13,10 @@ _LOGGER = logging.getLogger(__name__)
 
 PLATFORMS = ["sensor"]
 
+
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
+    """TODO"""
+
     _LOGGER.debug("Setting up Ouman EH-800")
 
     hass.data.setdefault(DOMAIN, {})

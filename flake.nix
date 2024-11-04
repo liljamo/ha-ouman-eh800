@@ -34,10 +34,12 @@
             # Nix formatting
             alejandra.enable = true;
 
-            # Toml formatting
-            taplo.enable = true;
-
-            # TODO: Python linting and formatting
+            # Python linting and formatting
+            pylint = {
+              enable = true;
+              args = ["--disable=import-error"];
+            };
+            black.enable = true;
 
             # Spell checking
             typos = {
