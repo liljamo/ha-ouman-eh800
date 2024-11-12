@@ -12,7 +12,13 @@ from .eh800 import EH800
 
 _LOGGER = logging.getLogger(__name__)
 
-PLATFORMS = [Platform.CLIMATE, Platform.NUMBER, Platform.SENSOR, Platform.VALVE]
+PLATFORMS = [
+    Platform.CLIMATE,
+    Platform.NUMBER,
+    Platform.SENSOR,
+    Platform.SWITCH,
+    Platform.VALVE,
+]
 
 UPDATE_INTERVAL = timedelta(minutes=1)
 

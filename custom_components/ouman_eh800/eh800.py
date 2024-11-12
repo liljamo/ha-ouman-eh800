@@ -49,6 +49,11 @@ VALUES: tuple[Value, ...] = (
     Value(key="l1_tmrsp", register="S_274_85"),
     # Mittaukset > L1 Venttiilin asento
     Value(key="l1_valve_position", register="S_272_85"),
+    # EH-800 > Kotona/Poissa
+    # 0 = Kotona
+    # 1 = Poissa
+    # 2 = Ei K/P-ohjausta
+    Value(key="home_away", register="S_135_85"),
     # EH-800 > Huonelämpötila
     Value(key="room_temperature", register="S_261_85"),
     # EH-800 > Huonelämpötilan hienosäätö
