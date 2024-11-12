@@ -12,7 +12,7 @@ from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
 from . import OumanEH800Device
-from .const import DOMAIN
+from .const import DOMAIN, EVENT_CHANGE_L1_OPERATION_MODE
 from .eh800 import OPERATION_MODES
 
 _LOGGER = logging.getLogger(__name__)
@@ -66,6 +66,18 @@ class OumanEH800DeviceClimate(ClimateEntity):
         self._attr_name = description.key.replace("_", " ").capitalize()
         self._attr_unique_id = f"ouman_eh800_{description.key}"
         self._attr_device_info = device.device_info
+
+    async def async_added_to_hass(self):
+        self.hass.bus.async_listen(
+            EVENT_CHANGE_L1_OPERATION_MODE, self.async_update_event_handler
+        )
+
+    async def async_update_event_handler(
+        self,
+        event,  # pylint: disable=unused-argument
+    ):
+        await self.async_update()
+        self.async_write_ha_state()
 
     @property
     def extra_state_attributes(self) -> dict:
@@ -131,6 +143,7 @@ class OumanEH800DeviceClimate(ClimateEntity):
             self.entity_description.operation_mode_key,
             operation_mode.value,
         )
+        self.hass.bus.async_fire(EVENT_CHANGE_L1_OPERATION_MODE)
         self.async_write_ha_state()
 
     async def async_update(self) -> None:
