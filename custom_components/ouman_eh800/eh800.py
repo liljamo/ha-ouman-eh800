@@ -81,6 +81,10 @@ class EH800:
 
         self._client = AsyncClient()
 
+        self._request_query = "request?"
+        for value in VALUES:
+            self._request_query += f"{value.register};"
+
         self.data = {}
 
     async def _refresh_login(self) -> bool:
@@ -97,12 +101,30 @@ class EH800:
         _LOGGER.error("Login error")
         return False
 
-    async def _request_value(self, register) -> str:
-        """Request a value from the API."""
-        r = await self._client.get(f"{self._uri}/request?{register}")
-        eq_index = r.text.find("=")
-        sc_index = r.text.find(";")
-        return r.text[eq_index + 1 : sc_index]
+    async def _request_values(self) -> bool:
+        """
+        Request values from the API.
+        """
+        r = await self._client.get(f"{self._uri}/{self._request_query}")
+        if r.status_code != 200:
+            _LOGGER.error("unexpected return code %s", r.status_code)
+            return False
+
+        # Remove suffix and prefix so we end up with key=val pairs separated by
+        # semicolons: key=val;key2=val;key3=val
+        text = r.text.removeprefix("request?").removesuffix("\x00").removesuffix(";")
+        pairs = text.split(";")
+        for pair in pairs:
+            kv = pair.split("=")
+            # Only process those that returned something
+            if len(kv) == 2:
+                # Find the data key for the register
+                data_key = [value.key for value in VALUES if value.register == kv[0]][0]
+                self.data[data_key] = kv[1]
+            else:
+                _LOGGER.warning("register %s didn't return a value", str(kv[0]))
+
+        return True
 
     async def _update_value(self, value: Value, new_value) -> None:
         """
@@ -127,8 +149,8 @@ class EH800:
         if not await self._refresh_login():
             return False
 
-        for value in VALUES:
-            self.data[value.key] = await self._request_value(value.register)
+        if not await self._request_values():
+            return False
 
         return True
 
