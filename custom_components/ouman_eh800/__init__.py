@@ -27,6 +27,8 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         config[CONF_USERNAME],
         config[CONF_PASSWORD],
     )
+    # Do an initial update straight away.
+    await eh800.update()
 
     device = OumanEH800Device(hass, eh800, entry)
 
