@@ -43,8 +43,6 @@ class OumanEH800Device:
         self.device = device
         self.entry = entry
 
-        self._available = True
-
     @Throttle(UPDATE_INTERVAL)
     async def async_update(
         self,
