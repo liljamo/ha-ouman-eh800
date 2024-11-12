@@ -39,7 +39,6 @@ class OumanEH800ConfigFlow(
     async def _create_entry(
         self, host: str, port: int, username: str, password: str
     ) -> ConfigFlowResult:
-        """Register new entry."""
         return self.async_create_entry(
             title=f"Ouman {host}",
             data={
@@ -53,7 +52,6 @@ class OumanEH800ConfigFlow(
     async def async_step_user(
         self, user_input: dict[str, Any] | None = None
     ) -> ConfigFlowResult:
-        """TODO"""
         if user_input is None:
             return self.async_show_form(step_id="user", data_schema=USER_SCHEMA)
 

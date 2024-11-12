@@ -37,7 +37,12 @@
             # Python linting and formatting
             pylint = {
               enable = true;
-              args = ["--disable=import-error"];
+              args = [
+                "--disable=import-error"
+                "--disable=missing-class-docstring"
+                "--disable=missing-function-docstring"
+                "--disable=missing-module-docstring"
+              ];
             };
             black.enable = true;
 
