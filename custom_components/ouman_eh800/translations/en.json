@@ -1,1 +1,15 @@
-../strings.json
+{
+    "config": {
+        "step": {
+            "user": {
+                "title": "Setup Ouman EH-800",
+                "data": {
+                    "host": "The hostname or IP address of your Ouman EH-800.",
+                    "port": "The port of your Ouman EH-800 web interface.",
+                    "username": "The username of your Ouman EH-800 account.",
+                    "password": "The password of your Ouman EH-800 account."
+                }
+            }
+        }
+    }
+}

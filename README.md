@@ -32,3 +32,8 @@ tracker open (src.quest is under long renovations).
 git remote add --mirror=push github-mirror git@github.com:liljamo/ha-ouman-eh800.git
 git push github-mirror
 ```
+
+## Development
+
+### Notes
+- `strings.json` should match `translations/en.json`.
