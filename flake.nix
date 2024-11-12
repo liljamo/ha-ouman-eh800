@@ -38,6 +38,7 @@
             pylint = {
               enable = true;
               args = [
+                "--disable=duplicate-code"
                 "--disable=import-error"
                 "--disable=missing-class-docstring"
                 "--disable=missing-function-docstring"
