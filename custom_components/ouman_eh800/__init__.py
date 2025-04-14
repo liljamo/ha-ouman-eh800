@@ -29,6 +29,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
     config = dict(entry.data)
     eh800 = EH800(
+        hass,
         config[CONF_HOST],
         config[CONF_PORT],
         config[CONF_USERNAME],

@@ -2,6 +2,8 @@ import dataclasses
 import logging
 
 from httpx import AsyncClient
+from homeassistant.core import HomeAssistant
+from homeassistant.helpers.httpx_client import get_async_client
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -80,11 +82,13 @@ OPERATION_MODES: tuple[OperationMode, ...] = (
 
 
 class EH800:
-    def __init__(self, host: str, port: int, username: str, password: str) -> None:
+    def __init__(
+        self, hass: HomeAssistant, host: str, port: int, username: str, password: str
+    ) -> None:
         self._uri = f"http://{host}:{port}"
         self._login = f"uid={username};pwd={password};"
 
-        self._client = AsyncClient()
+        self._client: AsyncClient = get_async_client(hass)
 
         self._request_query = "request?"
         for value in VALUES:
