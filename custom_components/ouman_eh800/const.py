@@ -1,4 +1,4 @@
-""" Ouman EH-800 consts """
+"""Ouman EH-800 consts"""
 
 DOMAIN = "ouman_eh800"
 

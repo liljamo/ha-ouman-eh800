@@ -85,12 +85,12 @@ class EH800:
     def __init__(
         self, hass: HomeAssistant, host: str, port: int, username: str, password: str
     ) -> None:
-        self._uri = f"http://{host}:{port}"
-        self._login = f"uid={username};pwd={password};"
+        self._uri: str = f"http://{host}:{port}"
+        self._login: str = f"uid={username};pwd={password};"
 
         self._client: AsyncClient = get_async_client(hass)
 
-        self._request_query = "request?"
+        self._request_query: str = "request?"
         for value in VALUES:
             self._request_query += f"{value.register};"
 
@@ -163,7 +163,7 @@ class EH800:
 
         return True
 
-    async def update_value(self, key, new_value) -> None:
+    async def update_value(self, key: str, new_value) -> None:
         """Update a value via the API."""
         value = [value for value in VALUES if value.key == key][0]
         _LOGGER.debug(

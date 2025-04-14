@@ -36,7 +36,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         config[CONF_PASSWORD],
     )
     # Do an initial update straight away.
-    await eh800.update()
+    _ = await eh800.update()
 
     device = OumanEH800Device(hass, eh800, entry)
 
@@ -49,9 +49,9 @@ class OumanEH800Device:
     """Ouman EH-800 Device instance."""
 
     def __init__(self, hass: HomeAssistant, device: EH800, entry: ConfigEntry) -> None:
-        self._hass = hass
-        self.device = device
-        self.entry = entry
+        self._hass: HomeAssistant = hass
+        self.device: EH800 = device
+        self.entry: ConfigEntry = entry
 
     @Throttle(UPDATE_INTERVAL)
     async def async_update(
