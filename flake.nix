@@ -43,6 +43,8 @@
                 "--disable=missing-class-docstring"
                 "--disable=missing-function-docstring"
                 "--disable=missing-module-docstring"
+                "--disable=too-many-arguments"
+                "--disable=too-many-positional-arguments"
               ];
             };
             black.enable = true;
