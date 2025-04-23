@@ -33,6 +33,26 @@ thinking.
     - [#kotiautomaatio:hacklab.fi](https://matrix.to/#/#kotiautomaatio:hacklab.fi) (Finnish)
 - Open an issue on GitHub.
 
+### Advanced examples
+#### Reading valve position as a number
+In Home Assistant, valve entities only record whether the valve is open or not,
+due to exact position reporting being optional and dependent on the integration
+implementation.
+
+This integration does implement exact position reporting, and as such the
+position can be read by templates.
+
+Example, this will make a helper that can be viewed like a graph in history:
+```yaml
+template:
+  - sensor:
+    - name: "Valve Position"
+      unit_of_measurement: "%"
+      state: >
+          {{ state_attr('valve.l1_valve_position', 'current_position') }}
+```
+
+
 ## GitHub mirror
 
 Mirrored to GitHub so HACS can import it and to have a more accessible issue
