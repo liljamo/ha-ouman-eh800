@@ -1,12 +1,27 @@
 # HA Ouman EH-800
 
+## Important, Home Assistant has got a built-in integration now!
+Now on 28.5.2026, I've just read on the beta release notes of 2026.6.0 that
+another integration has been merged into Home Assistant.
+See:
+* https://rc.home-assistant.io/integrations/ouman_eh_800
+* https://github.com/home-assistant/core/pull/169733
+
+Consider moving to that, because I will be removing this repository from GitHub
+during the coming summer, after migrating myself to the built-in one.
+
+I'd like to thank the few people who I know use this, who have contacted me for
+support even. This has been my first project to have actual users.
+
+This was originally made because I needed it for my own use, but then got left
+with only L1 support due to lack of time and use of the L2 side.
+
+This was surprisingly low maintanence and just worked after the initial version,
+but I'm happy to have less maintanence burden now, especially because I don't
+know how much longer I'll be living in my current house with an Ouman EH-800.
+
+## Old readme:
 An Ouman EH-800 integration for Home Assistant.
-
-Mostly kinda working™.
-
-I'll add instructions after some more testing.
-
-A demo video is available at [liljamo.dev/ha-ouman-eh800](https://liljamo.dev/ha-ouman-eh800/).
 
 ### What's supported
 
@@ -23,15 +38,6 @@ I don't have a second loop, so no L2 values are currently available.
 
 I'll add all read-only values soon, but read-write values will require some more
 thinking.
-
-
-### Need help?
-
-- Contact me via one of the methods listed on [liljamo.com/contact](https://liljamo.com/contact/).
-- You can mention me on Matrix (see above for @) for a quick question or chat in:
-    - [#Home-Assistant:matrix.org](https://matrix.to/#/#Home-Assistant:matrix.org) (English)
-    - [#kotiautomaatio:hacklab.fi](https://matrix.to/#/#kotiautomaatio:hacklab.fi) (Finnish)
-- Open an issue on GitHub.
 
 ### Advanced examples
 #### Reading valve position as a number
@@ -50,23 +56,6 @@ template:
       unit_of_measurement: "%"
       state: >
           {{ state_attr('valve.l1_valve_position', 'current_position') }}
-```
-
-
-## GitHub mirror
-
-Mirrored to GitHub so HACS can import it and to have a more accessible issue
-form available.
-
-### Mirror policy
-
-You may open issues and PRs on GitHub, the mirror is "interactive".
-
-### Pushing the mirror
-
-```sh
-git remote add --mirror=push github-mirror git@github.com:liljamo/ha-ouman-eh800.git
-git push github-mirror
 ```
 
 ## Development
